@@ -4,69 +4,15 @@ import '../styles/parent-form.scss';
 class ParentForm extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            first: '',
-            last: '',
-            dob: '',
-            age: '',
-            height: '',
-            weight: '',
-            eyes: 'blue',
-            hair: 'brown',
-            disorders: [],
-            options: {
-                eyes: ['blue', 'green', 'brown', 'hazel', 'gray'],
-                hair: ['brown', 'blond', 'black', 'red', 'gray'],
-                disorders: ['sickle cell anemia', 'tay-sachs disease', 'cystic fibrosis', 'thalassemia']
-            }
-        };
 
-        this.handleTextChange = this.handleTextChange.bind(this);
-        //this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleTextChange(event) {
-        const target = event.target;
-        let name;
-        if (typeof target.name === 'undefined') {
-            name = target.className;
-        } else {
-            name = target.name;
-        }
-        const curValue = this.state[name];
-        let value;
-
-        //Only accept digits in the age, height, and weight inputs
-        if ((name === 'age' || name === 'height' || name === 'weight')
-            && !(/^[0-9]+$/.test(target.value) || target.value === '')) {
-            value = curValue;
-        } else {
-            value = target.value;
-        }
-        
-        if (Array.isArray(this.state[name])) {
-            if (curValue.includes(target.value)) {
-                if (curValue.length === 1) {
-                    value = [];
-                } else {
-                    value = curValue.filter((v) => { return (v !== target.value) });
-                }
-            } else {
-                value = this.state[name].concat([target.value]);
-            }
-        }
-
-        this.setState({
-            [name]: value
-        })
-
+        this.handleTextChange = this.props.handleEvent.bind(this);
     }
 
     renderText(name) {
         return (
             <ParentText
                 name={name}
-                value={this.state[name]}
+                value={this.props.parent[name]}
                 onChange={this.handleTextChange}
             />
         );
@@ -76,19 +22,26 @@ class ParentForm extends Component {
         return (
             <ParentSelect
                 name={name}
-                value={this.state[name]}
-                options={this.state['options'][name]}
+                value={this.props.parent[name]}
+                options={this.props.options[name]}
                 onChange={this.handleTextChange}
             />
         )
     }
 
+    renderButton(name) {
+        return (
+            <ParentButton 
+                name={name}
+                onClick={() => this.props.onButtonClick(name)}
+            />
+        );
+    }
+
     render() {
         return (
-            <form className="parent-form">
-                <ParentButton
-                    name={'cancel'}
-                />
+            <form className="parent-form" onSubmit={this.props.onSubmit}>
+                {this.renderButton('cancel')}
                 <ParentSubmit
                 />
                 {this.renderText('first')}
@@ -109,7 +62,7 @@ function ParentButton(props) {
     const desc = props.name === 'cancel' ? 'Cancel Creation' : 'Add Parent';
     return (
         <div className="input-button" style={{ gridArea: props.name }}>
-            <input type="button" value={desc} />
+            <input type="button" value={desc} onClick={props.onClick}/>
         </div>
     );
 }
@@ -134,6 +87,7 @@ function ParentText(props) {
                 type="text"
                 value={props.value}
                 onChange={props.onChange}
+                required
             />
         </div>
     );
@@ -146,7 +100,7 @@ function ParentSelect(props) {
     if (props.name === 'disorders') {
         desc = 'GENETIC DISORDERS (choose all that apply)';
         multiple = true;
-        onChange = ()=>{};
+        onChange = () => { };
     }
 
     desc += ': ';
@@ -169,11 +123,12 @@ function ParentSelect(props) {
             <label>
                 {desc}
             </label>
-            <select 
-                name={props.name} 
-                multiple={multiple} 
-                value={props.value} 
+            <select
+                name={props.name}
+                multiple={multiple}
+                value={props.value}
                 onChange={onChange}
+                required
             >
                 {optList}
             </select>

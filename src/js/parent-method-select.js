@@ -2,15 +2,27 @@ import React, { Component } from 'react';
 import '../styles/parent-method-select.scss';
 
 class ParentMethodSelect extends Component {
+
+    renderMethodButton(method) {
+        const desc = method === 'parent' ? 'Create a New Parent' : 'Choose From Donors';
+        const className = method === 'parent' ? 'create-parent' : 'use-donor';
+
+        return (
+            <div className={className}>
+                <ParentMethodButton
+                    desc={desc}
+                    onClick={() => this.props.onClick(method)}
+                />
+            </div>
+        );
+
+    }
+
     render() {
         return (
             <div className="select-method">
-                <div className="use-donor">
-                    <ParentMethodButton desc={'Choose From Donors'} />
-                </div>
-                <div className="create-parent">
-                    <ParentMethodButton desc={'Create a New Parent'} />
-                </div>
+                {this.renderMethodButton('parent')}
+                {this.renderMethodButton('donor')}
             </div>
         );
     }
@@ -18,7 +30,7 @@ class ParentMethodSelect extends Component {
 
 function ParentMethodButton(props) {
     return (
-        <button className="button">{props.desc}</button>
+        <button className="button" onClick={props.onClick}>{props.desc}</button>
     );
 }
 
