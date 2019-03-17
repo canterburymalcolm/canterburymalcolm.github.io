@@ -1,6 +1,3 @@
-# Designer Babies Database
-initial commit
-
 ## Project Proposal
 We are proposing a database that supports a designer baby store. This database would provide support for ‘baby parts’ allowing clients (or parents) to customize the traits of their baby - for a cost! Parents genetics would provide information for the default state of the child. Not only this, there will also be a pool of donors that can supply a diverse selection of features that a single-parent can choose from.
 

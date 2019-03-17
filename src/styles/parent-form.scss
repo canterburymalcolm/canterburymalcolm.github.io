@@ -1,0 +1,40 @@
+.parent-form {
+    padding: 0 15vw;
+    display: grid;
+    grid: 
+    "cancel cancel  . .  submit submit" 1fr 
+    "first first  last last  dob dob" 1fr 
+    "age .  eyes hair  traits traits" 1fr 
+    "height . . . . ." 1fr  
+    "weight . . . . ." 1fr 
+    / 16.6%;
+
+
+    div {
+        //width: 90%;
+    }
+
+    .input-button {
+        justify-self: center;
+        padding: 10px 0 20px 0;
+        input {
+            font-size: 15px;
+            padding: 7px;
+            background-color: white;
+        }
+
+        input:hover {
+            background-color: gainsboro;
+        }
+    }
+
+    .input-text {
+        input {
+            max-width: 80%;
+        }
+    }
+
+    .input-select {
+    }
+    
+}
