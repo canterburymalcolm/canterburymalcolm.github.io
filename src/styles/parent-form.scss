@@ -1,13 +1,13 @@
 .parent-form {
-    padding: 0 15vw;
+    padding: 0 17vw;
     display: grid;
     grid: 
     "cancel cancel  . .  submit submit" 1fr 
     "first first  last last  dob dob" 1fr 
-    "age .  eyes hair  traits traits" 1fr 
-    "height . . . . ." 1fr  
+    "age .  eyes hair  disorders disorders" 1fr 
+    "height . eyes . . ." 1fr  
     "weight . . . . ." 1fr 
-    / 16.6%;
+    / 11vw 11vw 11vw 11vw 11vw 11vw;
 
 
     div {
@@ -17,6 +17,7 @@
     .input-button {
         justify-self: center;
         padding: 10px 0 20px 0;
+        
         input {
             font-size: 15px;
             padding: 7px;
@@ -29,12 +30,25 @@
     }
 
     .input-text {
+        label {
+            margin-right: 50%;
+            font-size: 14px;
+        }
         input {
+            min-width: 50%;
             max-width: 80%;
         }
     }
 
     .input-select {
+        label {
+            margin-right: 50%; 
+            font-size: 14px;
+        }
+
+        select {
+            min-width: 80%;
+        }
     }
     
 }
