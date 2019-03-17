@@ -30,20 +30,23 @@ class ParentForm extends Component {
     }
 
     renderButton(name) {
-        return (
-            <ParentButton 
-                name={name}
-                onClick={() => this.props.onButtonClick(name)}
-            />
-        );
+        if (!(name === 'next' || name === 'prev') || this.props.selected === 'donor') {
+            return (
+                <ParentButton
+                    name={name}
+                    onClick={() => this.props.onButtonClick(name)}
+                />
+            );
+        }
     }
 
     render() {
         return (
             <form className="parent-form" onSubmit={this.props.onSubmit}>
                 {this.renderButton('cancel')}
-                <ParentSubmit
-                />
+                {this.renderButton('next')}
+                {this.renderButton('prev')}
+                <ParentSubmit />
                 {this.renderText('first')}
                 {this.renderText('last')}
                 {this.renderText('dob')}
@@ -59,10 +62,10 @@ class ParentForm extends Component {
 }
 
 function ParentButton(props) {
-    const desc = props.name === 'cancel' ? 'Cancel Creation' : 'Add Parent';
+    const desc = props.name === 'cancel' ? 'Cancel Creation' : props.name.toUpperCase();
     return (
         <div className="input-button" style={{ gridArea: props.name }}>
-            <input type="button" value={desc} onClick={props.onClick}/>
+            <input type="button" value={desc} onClick={props.onClick} />
         </div>
     );
 }

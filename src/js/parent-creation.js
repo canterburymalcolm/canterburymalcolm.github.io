@@ -2,32 +2,41 @@ import React, { Component } from 'react';
 import ParentMethodSelect from './parent-method-select.js';
 import ParentForm from './parent-form.js';
 
+
+
 class Parent {
-    constructor() {
-        this.first = '';
-        this.last = '';
-        this.dob = '';
-        this.age = '';
-        this.height = '';
-        this.weight = '';
-        this.eyes = 'blue';
-        this.hair = 'brown';
-        this.disorders = [];
+    constructor(first, last, dob, age, height, weight, eyes, hair, diorders) {
+        this.first = first || '';
+        this.last = last || '';
+        this.dob = dob || '';
+        this.age = age || '';
+        this.height = height || '';
+        this.weight = weight || '';
+        this.eyes = eyes || 'blue';
+        this.hair = hair || 'brown';
+        this.disorders = diorders || [];
     }
 }
+
+var exampleDonors = [
+    new Parent("first", "donor", "1", "1", "1", "1", "green", "blond", ['none']),
+    new Parent("second", "donor", "2", "2", "2", "2", "brown", "black", ['none']),
+    new Parent("third", "donor", "3", "3", "3", "3", "hazel", "red", ['tay-sachs disease', 'cystic fibrosis']),
+];
 
 class ParentCreation extends Component {
     constructor(props) {
         super(props);
         this.state = {
             id: this.props.id,
-            parents: [new Parent(), new Parent()],
+            parents: [new Parent('malcolm'), new Parent()],
             options: {
                 eyes: ['blue', 'green', 'brown', 'hazel', 'gray'],
                 hair: ['brown', 'blond', 'black', 'red', 'gray'],
                 disorders: ['sickle cell anemia', 'tay-sachs disease', 'cystic fibrosis', 'thalassemia', 'none']
             },
-            donors: [],
+            donor: 0,
+            donors: exampleDonors,
             selected: ''
         }
     }
@@ -39,6 +48,9 @@ class ParentCreation extends Component {
     }
 
     handleTextChange(event) {
+        if (this.state.selected === 'donor') {
+            return;
+        }
         const target = event.target;
         let name;
         if (typeof target.name === 'undefined') {
@@ -77,24 +89,38 @@ class ParentCreation extends Component {
         })
     }
 
+    mod(n, m) {
+        return ((n % m) + m) % m;
+    }
+
     onParentButton(name) {
         if (name === 'cancel') {
             this.setState({
                 selected: ''
             });
+        } else {
+            const change = name === 'next' ? 1 : -1;
+            const index = this.mod((this.state.donor + change), this.state.donors.length);
+            this.setState({
+                donor: index
+            })
         }
     }
 
     render() {
-        let stage = <ParentMethodSelect onClick={(m) => this.onMethodSelect(m)}/>;
+        let stage = <ParentMethodSelect onClick={(m) => this.onMethodSelect(m)} />;
         if (this.state.selected !== '') {
+            const parent = this.state.selected === 'parent' ?
+                this.state.parents[this.state.id] :
+                this.state.donors[this.state.donor];
             stage =
                 <ParentForm
-                    parent={this.state.parents[this.state.id]}
+                    parent={parent}
                     options={this.state.options}
                     handleEvent={(e) => this.handleTextChange(e)}
                     onButtonClick={(n) => this.onParentButton(n)}
                     onSubmit={this.props.nextParent}
+                    selected={this.state.selected}
                 />
         }
         return (
