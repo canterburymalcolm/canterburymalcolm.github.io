@@ -1,0 +1,14 @@
+@import './assets.scss';
+
+.footer {
+    height: 100px;
+    width: 100%;
+
+    position: absolute;
+    bottom: 0;
+
+    background-color: $white;
+
+    display: grid;
+    grid: "first second" 1fr/ 1fr 1fr;
+}

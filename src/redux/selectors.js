@@ -1,0 +1,1 @@
+export const getPage = store => store.pages[store.pages.length - 1];

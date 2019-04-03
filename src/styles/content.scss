@@ -1,0 +1,9 @@
+@import './assets.scss';
+
+.content {
+    grid-area: content;
+
+    position: relative;
+
+    background-color: $background;
+}

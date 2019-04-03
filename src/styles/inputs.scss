@@ -1,0 +1,52 @@
+@import "./assets.scss";
+
+.text-input, .select-input {
+    align-self: end;
+    margin-top: 20px;
+    font-family: $fonts;
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 20px;
+        color: $secondary;
+    }
+
+    input, select {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        height: 45px;
+        font-family: $fonts;
+        color: $primary;
+        font-size: 20px;
+        border: 1px solid $accent;
+        border-radius: 5px;
+        padding-left: 16px;
+    }
+
+    select {
+        color: $selected;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    input::placeholder {
+        color: $selected;
+    }
+}
+
+.select-input {
+    position: relative;
+}
+
+.select-input:after {
+    content: url(../assets/select-arrow.png);
+    position: absolute;
+    right: 5px;
+    top: 36px;
+    padding: 11px 12px;
+    border-left: 1px solid $accent;
+    pointer-events: none;
+}

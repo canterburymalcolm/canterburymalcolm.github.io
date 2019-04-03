@@ -1,0 +1,16 @@
+@import './assets.scss';
+
+.sidebar {
+    height: 100vh;
+    grid-area: side;
+
+    background-color: $primary;
+    
+    div {
+        img {
+            height: 22vw;
+            width: 22vw;
+            padding: 90px 5.6vw;
+        }
+    }
+}

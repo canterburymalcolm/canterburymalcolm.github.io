@@ -2,26 +2,12 @@
     display: grid;
     grid: "donor . parent" 1fr / 48vw auto 48vw;
 
-    .use-donor {
+    #use-donor {
         grid-area: donor;
         justify-self: end;
     }
 
-    .create-parent {
+    #create-parent {
         grid-area: parent;
-    }
-
-    div {
-        margin-top: 20px;
-
-        .button {
-            font-size: 18px;
-            padding: 10px;
-            background-color: white;
-        }
-
-        .button:hover {
-            background-color: gainsboro;
-        }
     }
 }

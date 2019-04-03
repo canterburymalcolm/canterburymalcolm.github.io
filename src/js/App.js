@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import AddParent from './add-parent';
+import Sidebar from './sidebar';
+import Content from './content';
 import '../styles/App.scss';
 
 class App extends Component {
   render() {
     return (
-      <AddParent />
+      <div className="designer-baby-site">
+        <Sidebar />
+        <Content />
+      </div>
     );
   }
 }

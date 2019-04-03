@@ -1,0 +1,9 @@
+@import "./assets.scss";
+
+.title {
+    padding: 0 85px 0 100px;
+    h1 {
+        color: $primary;
+        font-size: 48px;
+    }
+}

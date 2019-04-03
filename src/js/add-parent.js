@@ -16,7 +16,6 @@ class AddParent extends Component {
             id: 0
         };
 
-
         this.nextParent = this.nextParent.bind(this);
     }
 

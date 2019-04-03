@@ -10,21 +10,28 @@
     / 11vw 11vw 11vw 11vw 11vw 11vw;
 
 
-    div {
-        //width: 90%;
+    // div {
+    //     //width: 90%;
+    // }
+    #cancel {
+    grid-area: cancel;
+    }
+
+    #submit {
+        grid-area: submit;
     }
 
     .input-button {
         justify-self: center;
         padding: 10px 0 20px 0;
         
-        input {
+        input, button {
             font-size: 15px;
             padding: 7px;
             background-color: white;
         }
 
-        input:hover {
+        input:hover, button:hover {
             background-color: gainsboro;
         }
     }
