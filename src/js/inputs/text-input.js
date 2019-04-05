@@ -1,7 +1,9 @@
 import React from 'react';
 import '../../styles/inputs.scss';
 
-function TextInput(props) {
+const TextInput = (props) => {
+
+    //Determine the type of this textInput
     let type = 'text';
     let placeholder = props.placeholder;
     if (props.isPassword) {
@@ -11,10 +13,13 @@ function TextInput(props) {
         type = 'email';
         placeholder = 'Your email address';
     }
+    
     return (
         <div className="text-input" style={{ gridArea: props.name }}>
             <label>
                 {props.desc}
+                {/* display the given error message after the description*/}
+                <span className="error">{props.error}</span>
             </label>
             <input
                 name={props.name}
@@ -25,7 +30,7 @@ function TextInput(props) {
                 required
             />
         </div>
-    );
+    )
 }
 
 export default TextInput;

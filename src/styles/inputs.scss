@@ -10,6 +10,10 @@
         margin-bottom: 10px;
         font-size: 20px;
         color: $secondary;
+
+        .error {
+            padding-left: 10px;
+        }
     }
 
     input, select {
@@ -49,4 +53,8 @@
     padding: 11px 12px;
     border-left: 1px solid $accent;
     pointer-events: none;
+}
+
+.error {
+    color: $error;
 }

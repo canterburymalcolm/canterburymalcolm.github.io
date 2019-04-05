@@ -11,12 +11,14 @@ import '../styles/content.scss';
 const Content = ({ page }) => {
     let content;
     let title;
+    
+    //Determine what content and what title to use depending on the current page
     switch (page) {
         case PAGES.LOG_IN:
-            content = <LogIn />
+            content = <LogIn returning={true}/>
             title = "Welcome back! Log in with your info below.";
             break;
-        case PAGES.SIGN_UP:
+        case PAGES.ADD_USER:
             content = <SignUp />
             title = "Hello! Please tell us a little bit about yourself.";
             break;

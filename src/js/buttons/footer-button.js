@@ -3,39 +3,47 @@ import { connect } from 'react-redux';
 import Button from './button';
 import { logIn, nextPage, prevPage } from '../../redux/actions';
 import { getPage } from '../../redux/selectors';
-import { PAGES } from '../../constants';
+import { PAGES, formMap } from '../../constants';
 import '../../styles/buttons.scss';
-
 
 const FooterButton = (props) => {
 
     const renderButton = () => {
         let className;
         let desc;
+        let submit;
+        let form = formMap.get(props.page);
+        //Assign the appropriate onClick depending on whether this is a primary
+        //or secondary button
         const onClick = props.first ? () => props.prevPage() : () => props.nextPage();
 
         if (props.first) {
             if (props.page === PAGES.LANDING) {
-                return <p>Already a user?
+                //Return a clickable span instead of a button on the landing page
+                return (
+                    <p>Already a user?
                         <span onClick={() => props.logIn()}> Log in</span>
-                </p>
+                    </p>
+                );
             } else {
-                className = "secondary"
-                desc = "Back"
+                className = "secondary";
+                desc = "Back";
             }
         } else {
-            className = "primary"
+            className = "primary";
+            submit = true;
             if (props.page === PAGES.LANDING) {
-                desc = "Sign Up"
-
+                desc = "Sign Up";
             } else {
-                desc = "Next"
+                desc = "Next";
             }
         }
         return <Button
             className={className}
             desc={desc}
             onClick={onClick}
+            form={form}
+            submit={submit}
         />
     }
     const position = props.first ? 'first' : 'second';
@@ -48,5 +56,5 @@ const FooterButton = (props) => {
 
 export default connect(
     state => ({ page: getPage(state) }),
-    { logIn, nextPage, prevPage}
+    { logIn, nextPage, prevPage }
 )(FooterButton);

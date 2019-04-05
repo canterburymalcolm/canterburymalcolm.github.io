@@ -1,22 +1,31 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import Form from './inputs/form';
 import TextInput from './inputs/text-input';
 import SelectInput from './inputs/select-input';
 import { STATES } from '../constants';
+import { addUser, nextPage } from '../redux/actions';
 
-const SignUp = () => {
+const SignUp = ({ addUser, nextPage }) => {
     return (
-        <div className="sign-up">
-            <TextInput 
+        <Form
+            className="sign-up"
+            onSubmit={(user) => {
+                addUser(user);
+                nextPage();
+            }}
+            >
+            <TextInput
                 name="email"
                 desc="Email address"
                 isEmail={true}
             />
-            <TextInput 
+            <TextInput
                 name="street"
                 desc="Street address"
                 placeholder="Your street address"
             />
-            <TextInput 
+            <TextInput
                 name="city"
                 desc="City"
                 placeholder="City"
@@ -27,14 +36,16 @@ const SignUp = () => {
                 placeholder='FL'
                 options={STATES}
             />
-            <TextInput 
+            <TextInput
                 name="zip"
                 desc="Zip"
                 placeholder="02115"
             />
-
-        </div>
+        </Form>
     )
 }
 
-export default SignUp;
+export default connect(
+    null,
+    { addUser, nextPage }
+)(SignUp);
