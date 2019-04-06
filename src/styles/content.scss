@@ -3,7 +3,12 @@
 .content {
     grid-area: content;
 
-    position: relative;
+    min-height: 100vh;
+    //margin-right: -16px;
 
     background-color: $background;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
 }

@@ -12,6 +12,9 @@ const TextInput = (props) => {
     } else if (props.isEmail) {
         type = 'email';
         placeholder = 'Your email address';
+    } else if (props.isNumber) {
+        type = 'number';
+        placeholder = '0';
     }
     
     return (
@@ -24,7 +27,7 @@ const TextInput = (props) => {
             <input
                 name={props.name}
                 type={type}
-                value={props.value}
+                value={props.initial}
                 placeholder={placeholder}
                 onChange={props.onChange}
                 required

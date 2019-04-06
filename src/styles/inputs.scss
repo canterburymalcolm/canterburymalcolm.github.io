@@ -1,32 +1,42 @@
 @import "./assets.scss";
 
 .text-input, .select-input {
+    color: $primary;
     align-self: end;
     margin-top: 20px;
     font-family: $fonts;
-
-    label {
-        display: block;
-        margin-bottom: 10px;
-        font-size: 20px;
-        color: $secondary;
-
-        .error {
-            padding-left: 10px;
-        }
-    }
 
     input, select {
         display: block;
         width: 100%;
         box-sizing: border-box;
-        height: 45px;
+        height: $input-height;
         font-family: $fonts;
         color: $primary;
-        font-size: 20px;
+        font-size: 18px;
         border: 1px solid $accent;
         border-radius: 5px;
         padding-left: 16px;
+    }
+
+    input[type=number] {
+        width: 50%;
+    }
+
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+
+    input:focus {
+        outline-color: $selected;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus {
+        -webkit-text-fill-color: $primary;
+        -webkit-box-shadow: 0 0 0px 1000px $highlighted inset;
+        box-shadow: 0 0 0px 1000px $highlighted inset;
     }
 
     select {
@@ -55,6 +65,116 @@
     pointer-events: none;
 }
 
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: $secondary;
+
+    .error {
+        padding-left: 10px;
+    }
+}
+
 .error {
     color: $error;
+}
+
+.option-bar {
+    margin-top: 30px;
+
+    .options {
+        display: grid;
+        grid-auto-columns: 1fr;
+        grid-auto-flow: column;
+        place-items: center;
+        height: $input-height;
+        box-sizing: border-box;
+        background-color: $white;
+        border: 1px solid $accent;
+        border-radius: 5px;
+
+        input {
+            height: $input-height - 18;
+            width: 90%;
+            font-family: $fonts;
+            color: $primary;
+            background-color: $white;
+            border: 0px;
+            border-radius: 3px;
+            font-size: 18px;
+        }
+
+        input:hover {
+            background-color: $highlighted;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        .selected {
+            background-color: $selected !important;
+        }
+    }
+}
+
+.checkbox-container {
+    margin-top: 30px;
+    grid-area: check;
+
+    .checkboxes {
+        display: grid;
+        grid-template-columns: repeat(3, 200px);
+        grid-auto-rows: 35px;
+        grid-auto-flow: row;
+
+        div {
+            display: grid;
+            grid-template-columns: 30px 160px;
+            align-items: center;
+            span {
+                font-size: 18px;
+                color: $primary;
+                font-weight: lighter;
+                margin-left: 10px;
+            }
+
+            label {
+                display: inline;
+            }
+
+            input {
+                display: none;
+            }
+
+            input + label {
+                margin: 0;
+                justify-self: center;
+                background-color: $white;
+                border: 1px solid $accent;
+                padding: 9px;
+                border-radius: 3px;
+                display: inline-block;
+                position: relative;
+            }
+
+            input + label:active, input:checked + label:active {
+                box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+            }
+
+            input:checked + label {
+                background-color: $selected;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+                color: $secondary;
+            }
+
+            input:checked + label:after {
+                content: url(../assets/check.png);
+                position: absolute;
+                top: -5px;
+                left: 4px;
+            }
+        }
+    }
 }

@@ -10,3 +10,8 @@ export const PREV_PAGE = "PREV_PAGE";
 export const START_USER = "START_USER";
 export const ADD_USER = "ADD_USER";
 export const SET_USER = "SET_USER";
+
+//Add parent profiles
+export const UPDATE_PARENT = "UPDATE_PARENT";
+export const ADD_MOM = "ADD_MOM";
+export const ADD_DAD = "ADD_DAD";

@@ -1,45 +1,87 @@
-import React, { Component } from 'react';
-import ParentCreation from './parent-creation.js';
+import React from 'react';
+import { connect } from 'react-redux';
+import Form from './inputs/form';
+import OptionBar from './inputs/option-bar';
+import TextInput from './inputs/text-input';
+import Checkboxes from './inputs/checkboxes';
+import { updateParent, addMom, addDad, nextPage } from '../redux/actions';
+import '../styles/parent-details.scss';
+import { getPage } from '../redux/selectors';
+import { PAGES } from '../constants';
 
-function CurrentParent(props) {
-    const parent = 'Parent ' + (props.parentNumber + 1);
+const AddParent = (props) => {
+
+    const submitAction = props.page === PAGES.ADD_MOM ? props.addMom : props.addDad;
+    const onSubmit = (values) => {
+        submitAction(values);
+        props.nextPage();
+    };
     return (
-        <span>{parent}</span>
-    );
+            <Form 
+                className='add-parent'
+                onChange={(values) => props.updateParent(values)}
+                onSubmit={onSubmit}
+            >
+            <OptionBar 
+                name='method'
+                desc='Method'
+            />
+            <div className='line' style={{ gridArea: 'line' }}></div>
+            <TextInput 
+                name='first' 
+                desc='First name' 
+                placeholder='Your first name'
+            />
+            <TextInput 
+                name='last'
+                desc='Last name'
+                placeholder='Your last name'
+            />
+            <TextInput 
+                name='age'
+                desc='Age'
+                isNumber={true}
+            />
+            <OptionBar 
+                name='eye'
+                desc='Eye color'
+            />
+            <TextInput 
+                name='weight'
+                desc='Weight (cm)'
+                isNumber={true}
+            />
+            <OptionBar 
+                name='hair'
+                desc='Hair color'
+            />
+            <TextInput 
+                name='height'
+                desc='Height (ft)'
+                isNumber={true}
+            />
+            <OptionBar 
+                name='emotion'
+                desc='Emotional Stability'
+            />
+            <TextInput 
+                name='foot'
+                desc='Foot Size'
+                isNumber={true}
+            />
+            <OptionBar 
+                name='strength'
+                desc='Strength'
+            />
+            <Checkboxes 
+                name='disorders'
+                desc='Genetic Disorders (choose all that apply)'
+            />
+            </Form>
+    )
 }
 
-class AddParent extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            id: 0
-        };
-
-        this.nextParent = this.nextParent.bind(this);
-    }
-
-    nextParent() {
-        this.setState({
-            id: 1
-        });
-    }
-
-    render() {
-        return (
-            <div className="add-parent">
-                <div className="select-parent">
-                    <div className="current-parent">
-                        <CurrentParent parentNumber={this.state.id} />
-                    </div>
-                </div>
-                <ParentCreation 
-                    id={this.state.id}
-                    nextParent={this.nextParent}
-                />
-            </div>
-        );
-    }
-}
-
-export default AddParent;
+export default connect(
+    state => ({ page: getPage(state) }),
+    { updateParent, addMom, addDad, nextPage }
+)(AddParent);

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Title from './title';
 import LogIn from './log-in';
 import SignUp from './sign-up';
+import AddParent from './add-parent';
 import Footer from './footer';
 import { PAGES } from '../constants';
 import { getPage } from '../redux/selectors';
@@ -15,16 +16,17 @@ const Content = ({ page }) => {
     //Determine what content and what title to use depending on the current page
     switch (page) {
         case PAGES.LOG_IN:
-            content = <LogIn returning={true}/>
-            title = "Welcome back! Log in with your info below.";
+            content = <LogIn />;
             break;
         case PAGES.ADD_USER:
-            content = <SignUp />
-            title = "Hello! Please tell us a little bit about yourself.";
+            content = <SignUp />;
+            break;
+        case PAGES.ADD_DAD:
+        case PAGES.ADD_MOM:
+            content = <AddParent />;
             break;
         default:
-            content = <LogIn />
-            title = "Let's create your account to get started designing a baby!";
+            content = <LogIn />;
     }
 
     return (

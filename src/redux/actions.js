@@ -1,27 +1,14 @@
 import {
-    CHANGE_METHOD,
-    ADD_PARENT,
     NEXT_PAGE,
     PREV_PAGE,
     LOG_IN,
     START_USER,
     ADD_USER,
-    SET_USER
+    SET_USER,
+    UPDATE_PARENT,
+    ADD_MOM,
+    ADD_DAD
 } from './action-types';
-
-export function changeMethod(method) {
-    return {
-        type: CHANGE_METHOD,
-        payload: { method }
-    }
-};
-
-export function addParent(parent) {
-    return {
-        type: ADD_PARENT,
-        payload: { parent }
-    }
-}
 
 //Transition between pages
 export const nextPage = () => ({ type: NEXT_PAGE });
@@ -40,4 +27,18 @@ export const addUser = (user) => ({
 export const setUser = (user) => ({
     type: SET_USER,
     payload: { user }
+});
+
+//Add or update parents
+export const updateParent = (parent) => ({
+    type: UPDATE_PARENT,
+    payload: { parent }
+});
+export const addMom = (parent) => ({
+    type: ADD_MOM,
+    payload: { parent }
+});
+export const addDad = (parent) => ({
+    type: ADD_DAD,
+    payload: { parent }
 });

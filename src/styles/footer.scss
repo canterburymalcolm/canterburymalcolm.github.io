@@ -2,9 +2,9 @@
 
 .footer {
     height: 100px;
-    width: 100%;
+    width: calc(200vw / 3);
 
-    position: absolute;
+    position: fixed;
     bottom: 0;
 
     background-color: $white;
