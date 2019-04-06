@@ -59,8 +59,8 @@ export const formMap = new Map([
 ]);
 
 export const titleMap = new Map([
-    [PAGES.LANDING, "Welcome back! Log in with your info below."],
-    [PAGES.LOG_IN, "Let's create your account to get started designing a baby!"],
+    [PAGES.LANDING, "Let's create your account to get started designing a baby!"],
+    [PAGES.LOG_IN, "Welcome back! Log in with your info below."],
     [PAGES.ADD_USER, "Hello! Please tell us a little bit about yourself."],
     [PAGES.ADD_MOM, "Step one is adding a mom."],
     [PAGES.ADD_DAD, "Now we just need a dad"]

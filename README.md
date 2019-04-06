@@ -5,4 +5,5 @@ It would also support business-like functions such as invoices and profits. In p
 
 ### Software Stack
 
-The database was designed and built with MySql. The supporting web application was made with React and Node.js.
+The database was designed and built with MySql. 
+The supporting web application was made with React and Redux. The website is able to query the database with Node.js.
