@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Form from './inputs/form';
-import OptionBar from './inputs/option-bar';
-import TextInput from './inputs/text-input';
-import Checkboxes from './inputs/checkboxes';
-import { updateParent, addMom, addDad, nextPage } from '../redux/actions';
-import '../styles/parent-details.scss';
-import { getPage } from '../redux/selectors';
-import { PAGES } from '../constants';
+import Form from '../inputs/form';
+import OptionBar from '../inputs/option-bar';
+import TextInput from '../inputs/text-input';
+import Checkboxes from '../inputs/checkboxes';
+import { PAGES } from '../../constants';
+import { updateParent, addMom, addDad, nextPage } from '../../redux/actions';
+import { getPage } from '../../redux/selectors';
+import '../../styles/parent-details.scss';
 
 const AddParent = (props) => {
 

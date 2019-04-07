@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Title from './title';
-import LogIn from './log-in';
-import SignUp from './sign-up';
-import AddParent from './add-parent';
+import LogIn from './users/log-in';
+import SignUp from './users/sign-up';
+import AddParent from './parents/add-parent';
+import AddDonor from './parents/add-donor';
 import Footer from './footer';
 import { PAGES } from '../constants';
 import { getPage } from '../redux/selectors';
@@ -24,6 +25,10 @@ const Content = ({ page }) => {
         case PAGES.ADD_DAD:
         case PAGES.ADD_MOM:
             content = <AddParent />;
+            break;
+        case PAGES.DONOR_MOM:
+        case PAGES.DONOR_DAD:
+            content = <AddDonor />;
             break;
         default:
             content = <LogIn />;

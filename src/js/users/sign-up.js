@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Form from './inputs/form';
-import TextInput from './inputs/text-input';
-import SelectInput from './inputs/select-input';
-import { STATES } from '../constants';
-import { addUser, nextPage } from '../redux/actions';
+import Form from '../inputs/form';
+import TextInput from '../inputs/text-input';
+import SelectInput from '../inputs/select-input';
+import { STATES } from '../../constants';
+import { addUser, nextPage } from '../../redux/actions';
 
 const SignUp = ({ addUser, nextPage }) => {
     return (

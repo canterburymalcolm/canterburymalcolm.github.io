@@ -1,7 +1,7 @@
 import { NEXT_PAGE, PREV_PAGE, LOG_IN } from '../action-types';
 import { PAGES, pageMap } from '../../constants';
 
-const initialState = [PAGES.LANDING];
+const initialState = [PAGES.DONOR_MOM];
 
 function pageReducer(state = initialState, action) {
     switch (action.type) {

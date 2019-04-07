@@ -39,7 +39,9 @@ export const PAGES = {
     LOG_IN: 'log-in',
     ADD_USER: 'add-user',
     ADD_MOM: 'add-mom',
-    ADD_DAD: 'add-dad'
+    ADD_DAD: 'add-dad',
+    DONOR_MOM: 'donor-mom',
+    DONOR_DAD: 'donor-dad'
 };
 
 //A map of each page and the page it transitions to
@@ -58,13 +60,23 @@ export const formMap = new Map([
     [PAGES.ADD_MOM, FORMS.ADD_PARENT]
 ]);
 
+const TITLES = {
+    LANDING: "Let's create your account to get started designing a baby!",
+    LOG_IN: "Welcome back! Log in with your info below.",
+    ADD_USER: "Hello! Please tell us a little bit about yourself.",
+    MOM: "Step one is adding a mom.",
+    DAD: "Now we just need a dad"
+};
+
 export const titleMap = new Map([
-    [PAGES.LANDING, "Let's create your account to get started designing a baby!"],
-    [PAGES.LOG_IN, "Welcome back! Log in with your info below."],
-    [PAGES.ADD_USER, "Hello! Please tell us a little bit about yourself."],
-    [PAGES.ADD_MOM, "Step one is adding a mom."],
-    [PAGES.ADD_DAD, "Now we just need a dad"]
-])
+    [PAGES.LANDING, TITLES.LANDING],
+    [PAGES.LOG_IN, TITLES.LOG_IN],
+    [PAGES.ADD_USER, TITLES.ADD_USER],
+    [PAGES.ADD_MOM, TITLES.MOM],
+    [PAGES.ADD_DAD, TITLES.DAD],
+    [PAGES.DONOR_MOM, TITLES.MOM],
+    [PAGES.DONOR_DAD, TITLES.DAD]
+]);
 
 export const optionBarMap = new Map([
     ['method', ['Create a New Parent', 'Choose From Donors']],

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Form from './inputs/form';
-import TextInput from './inputs/text-input';
-import { PAGES } from '../constants';
-import { startUser, nextPage } from '../redux/actions';
-import { getPage, getProfiles } from '../redux/selectors';
-import '../styles/user-info.scss';
+import Form from '../inputs/form';
+import TextInput from '../inputs/text-input';
+import { PAGES } from '../../constants';
+import { startUser, nextPage } from '../../redux/actions';
+import { getPage, getProfiles } from '../../redux/selectors';
+import '../../styles/user-info.scss';
 
 class LogIn extends Component {
     constructor(props) {

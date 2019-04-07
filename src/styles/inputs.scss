@@ -107,6 +107,7 @@ label {
 
         input:hover {
             background-color: $highlighted;
+            cursor: pointer;
         }
 
         input:focus {
