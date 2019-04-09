@@ -10,7 +10,17 @@
 }
 
 .add-donor {
-    grid: "method method method method method method method . ." 1fr "line line line line line line line line line" 40px "profs profs profs profs profs profs profs profs profs" auto /1fr 1fr 1fr 1fr 40px 1fr 1fr 1fr 1fr;
+    grid: "method method method method method method method . ." 1fr 
+          "line line line line line line line line line" 40px 
+          "error error error error error error . . ." auto 
+          "profs profs profs profs profs profs profs profs profs" auto 
+          /1fr 1fr 1fr 1fr 40px 1fr 1fr 1fr 1fr;
+
+    .error {
+        grid-area: error;
+        font-size: 20px;
+        margin-top: 20px;
+    }
 
     .profile-list {
         grid-area: profs;

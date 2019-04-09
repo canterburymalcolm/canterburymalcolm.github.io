@@ -48,7 +48,7 @@ const AddParent = (props) => {
             />
             <TextInput 
                 name='weight'
-                desc='Weight (cm)'
+                desc='Weight (lbs)'
                 isNumber={true}
             />
             <OptionBar 
@@ -57,7 +57,7 @@ const AddParent = (props) => {
             />
             <TextInput 
                 name='height'
-                desc='Height (ft)'
+                desc='Height (cm)'
                 isNumber={true}
             />
             <OptionBar 

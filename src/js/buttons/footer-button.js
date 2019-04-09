@@ -32,10 +32,17 @@ const FooterButton = (props) => {
         } else {
             className = "primary";
             submit = true;
-            if (props.page === PAGES.LANDING) {
-                desc = "Sign Up";
-            } else {
-                desc = "Next";
+            switch (props.page) {
+                case PAGES.LANDING:
+                    desc = "Sign Up";
+                    break;
+                case PAGES.ADD_MOM:
+                case PAGES.ADD_DAD:
+                case PAGES.DONOR_MOM:
+                case PAGES.DONOR_DAD:
+                    desc = "Add Parent";
+                    break;
+                default: desc = "Next";
             }
         }
         return <Button

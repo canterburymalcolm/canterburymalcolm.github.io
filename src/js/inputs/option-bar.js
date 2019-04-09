@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { changeMethod } from '../../redux/actions';
 import { optionBarMap } from '../../constants';
 import '../../styles/inputs.scss';
 
 class OptionBar extends Component {
     constructor(props) {
         super(props);
+        const defaultOption = this.props.defaultOption ? this.props.defaultOption : 0;
         this.state = {
-            selected: optionBarMap.get(this.props.name)[0]
+            selected: optionBarMap.get(this.props.name)[defaultOption]
         };
 
         this.props.onChange({
@@ -20,7 +23,12 @@ class OptionBar extends Component {
     selectOption(event) {
         this.setState({
             selected: event.target.value
-        });
+        }, () => {console.log('changed ' + this.props.name)});
+
+        if (this.props.name === 'method') {
+            this.props.changeMethod();
+        }
+
         this.props.onChange(event);
     }
 
@@ -54,4 +62,7 @@ class OptionBar extends Component {
     }
 }
 
-export default OptionBar; 
+export default connect(
+    null,
+    { changeMethod }
+)(OptionBar); 

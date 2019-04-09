@@ -30,7 +30,8 @@ export const FORMS = {
     SIGN_UP: 'sign-up-user',
     OLD_USER: 'old-user',
     ADD_USER: 'add-user',
-    ADD_PARENT: 'add-parent'
+    ADD_PARENT: 'add-parent',
+    ADD_DONOR: 'add-donor'
 }
 
 //All the pages on the website
@@ -49,7 +50,8 @@ export const pageMap = new Map([
     [PAGES.LANDING, PAGES.ADD_USER],
     [PAGES.ADD_USER, PAGES.ADD_MOM],
     [PAGES.LOG_IN, PAGES.ADD_MOM],
-    [PAGES.ADD_MOM, PAGES.ADD_DAD]
+    [PAGES.ADD_MOM, PAGES.ADD_DAD],
+    [PAGES.DONOR_MOM, PAGES.ADD_DAD]
 ]);
 
 //Given a page returns the form for that page if one exists
@@ -57,7 +59,8 @@ export const formMap = new Map([
     [PAGES.LANDING, FORMS.SIGN_UP],
     [PAGES.LOG_IN, FORMS.OLD_USER],
     [PAGES.ADD_USER, FORMS.ADD_USER],
-    [PAGES.ADD_MOM, FORMS.ADD_PARENT]
+    [PAGES.ADD_MOM, FORMS.ADD_PARENT],
+    [PAGES.DONOR_MOM, FORMS.ADD_DONOR]
 ]);
 
 const TITLES = {
