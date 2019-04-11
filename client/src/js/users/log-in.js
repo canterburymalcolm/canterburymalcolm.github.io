@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import Form from '../inputs/form';
 import TextInput from '../inputs/text-input';
 import { PAGES } from '../../constants';
+import { hasUser } from '../client';
 import { startUser, nextPage } from '../../redux/actions';
-import { getPage, getProfiles } from '../../redux/selectors';
+import { getPage } from '../../redux/selectors';
 import '../../styles/user-info.scss';
 
 class LogIn extends Component {
@@ -21,37 +22,31 @@ class LogIn extends Component {
         const onSubmit = this.props.isLanding ?
             (user) => {
                 //Only start this user if the passwords match and 
-                //the username is free
+                //the username is available 
                 const match = user.password === user.confirm;
-                const found = this.props.profiles.reduce((acc, profile) => {
-                    return acc || (user.username === profile.username);
-                }, false);
-                if (!found && match) {
-                    this.props.startUser(user);
-                    this.props.nextPage();
-                }
-                this.setState({
-                    isFree: !found,
-                    isMatch: match
+                hasUser(user, false, found => {
+                    if (!found && match) {
+                        this.props.startUser(user);
+                        this.props.nextPage();
+                    } else {
+                        this.setState({
+                            isFree: !found,
+                            isMatch: match
+                        });
+                    }
                 });
             } :
             (user) => {
-                //Get the index of the this user if it exists in profiles
-                //Set the current user to that index
-                let index = -1;
-                this.props.profiles.forEach((profile, i) => {
-                    if (user.username === profile.username
-                        && user.password === profile.password) {
-                        index = i;
+                //Get the user_id of the this user if it exists
+                //Set the current user to that id
+                hasUser(user, true, index => {
+                    if (index >= 0) {
+                        this.props.startUser({ id: index });
+                        this.props.nextPage();
                     }
                 });
-                const isValid = (index >= 0);
-                if (isValid) {
-                    this.props.startUser({ id: index });
-                    this.props.nextPage();
-                }
                 this.setState({
-                    isValid: isValid
+                    isValid: false
                 });
             };
         //Decide which error message to display
@@ -93,8 +88,7 @@ class LogIn extends Component {
 
 export default connect(
     state => ({
-        isLanding: (getPage(state) === PAGES.LANDING),
-        profiles: getProfiles(state)
+        isLanding: (getPage(state) === PAGES.LANDING)
     }),
     { startUser, nextPage }
 )(LogIn);
