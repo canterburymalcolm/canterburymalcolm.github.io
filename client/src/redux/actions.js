@@ -3,8 +3,6 @@ import {
     PREV_PAGE,
     LOG_IN,
     CHANGE_METHOD,
-    START_USER,
-    ADD_USER,
     SET_USER,
     UPDATE_PARENT,
     ADD_MOM,
