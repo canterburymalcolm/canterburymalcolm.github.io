@@ -71,11 +71,13 @@
 // });
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const mysql = require('mysql');
-
 const port = 3001;
 
 const app = express();
+
+const jsonParser = bodyParser.json();
 
 const con = mysql.createConnection({
   host: "localhost",
@@ -95,7 +97,7 @@ con.connect((err) => {
   });
 });
 
-app.get('/api/users/has-user', (req, res) => {
+app.get('/api/user', (req, res) => {
   const username = req.query.name;
   const password = req.query.pass;
 
@@ -126,6 +128,29 @@ app.get('/api/users/has-user', (req, res) => {
     } else {
       res.json((result.length != 0));
     }
+  });
+});
+
+app.post('/api/user', jsonParser, (req, res) => {
+  if (!req.body) return res.sendStatus(400);
+
+  const user = req.body;
+  const fields = [
+    user.username,
+    user.password,
+    user.email,
+    user.street,
+    user.city,
+    user.state,
+    user.zip
+  ];
+  const sql = 'INSERT INTO user (username, password, email, street, city, state, zip) ' +
+              'VALUES (?, ?, ?, ?, ?, ?, ?)';
+  con.query(sql, fields, (err, result) => {
+    if (err) throw err;
+
+    console.log('added ' + user.username + ' at ' + result.insertId);
+    res.json(result.insertId);
   });
 });
 

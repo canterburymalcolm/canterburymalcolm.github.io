@@ -4,7 +4,7 @@ import Form from '../inputs/form';
 import TextInput from '../inputs/text-input';
 import { PAGES } from '../../constants';
 import { hasUser } from '../client';
-import { startUser, nextPage } from '../../redux/actions';
+import { setUser, nextPage } from '../../redux/actions';
 import { getPage } from '../../redux/selectors';
 import '../../styles/user-info.scss';
 
@@ -26,7 +26,7 @@ class LogIn extends Component {
                 const match = user.password === user.confirm;
                 hasUser(user, false, found => {
                     if (!found && match) {
-                        this.props.startUser(user);
+                        this.props.setUser(user);
                         this.props.nextPage();
                     } else {
                         this.setState({
@@ -41,13 +41,15 @@ class LogIn extends Component {
                 //Set the current user to that id
                 hasUser(user, true, index => {
                     if (index >= 0) {
-                        this.props.startUser({ id: index });
+                        this.props.setUser({ id: index });
                         this.props.nextPage();
+                    } else {
+                        this.setState({
+                            isValid: false
+                        });
                     }
                 });
-                this.setState({
-                    isValid: false
-                });
+
             };
         //Decide which error message to display
         let userError = '';
@@ -90,5 +92,5 @@ export default connect(
     state => ({
         isLanding: (getPage(state) === PAGES.LANDING)
     }),
-    { startUser, nextPage }
+    { setUser, nextPage }
 )(LogIn);

@@ -37,8 +37,7 @@ class Form extends Component {
             if (child) {
                 //console.log(child.props.name + ': ' + this.state.values[child.props.name]);
                 return React.cloneElement(child, {
-                    onChange: (event) => this.handleInputChange(event),
-                    //initial: this.state.values[child.props.name]  
+                    onChange: (event) => this.handleInputChange(event)
                 });
             }
         });

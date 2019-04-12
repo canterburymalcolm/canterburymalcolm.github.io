@@ -17,15 +17,7 @@ export const prevPage = () => ({ type: PREV_PAGE });
 export const logIn = () => ({ type: LOG_IN });
 export const changeMethod = () => ({ type: CHANGE_METHOD});
 
-//Add and update users
-export const startUser = (user) => ({
-    type: START_USER,
-    payload: { user }
-});
-export const addUser = (user) => ({
-    type: ADD_USER,
-    payload: { user }
-});
+//Set the current user
 export const setUser = (user) => ({
     type: SET_USER,
     payload: { user }

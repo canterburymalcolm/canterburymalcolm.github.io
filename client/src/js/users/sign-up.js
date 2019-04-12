@@ -3,15 +3,18 @@ import { connect } from 'react-redux';
 import Form from '../inputs/form';
 import TextInput from '../inputs/text-input';
 import SelectInput from '../inputs/select-input';
+import { addUser } from '../client';
 import { STATES } from '../../constants';
-import { addUser, nextPage } from '../../redux/actions';
+import { setUser, nextPage } from '../../redux/actions';
 
-const SignUp = ({ addUser, nextPage }) => {
+const SignUp = ({ curUser, setUser, nextPage }) => {
     return (
         <Form
             className="sign-up"
             onSubmit={(user) => {
-                addUser(user);
+                addUser({...curUser, ...user}, id => {
+                    setUser({ id: id });
+                });
                 nextPage();
             }}
             >
@@ -33,19 +36,20 @@ const SignUp = ({ addUser, nextPage }) => {
             <SelectInput
                 name='state'
                 desc='State'
-                placeholder='FL'
+                placeholder='MA'
                 options={STATES}
             />
             <TextInput
                 name="zip"
                 desc="Zip"
-                placeholder="02115"
+                placeholder={'02115'}
+                isNumber={true}
             />
         </Form>
     )
 }
 
 export default connect(
-    null,
-    { addUser, nextPage }
+    state => ({ curUser: state.user }),
+    { setUser, nextPage }
 )(SignUp);

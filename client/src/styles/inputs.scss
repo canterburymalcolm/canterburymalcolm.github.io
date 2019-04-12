@@ -19,7 +19,7 @@
         padding-left: 16px;
     }
 
-    input[type=number] {
+    input[type=number]:not([name=zip]) {
         width: 50%;
     }
 

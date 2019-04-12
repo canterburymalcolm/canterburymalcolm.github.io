@@ -6,9 +6,7 @@ export const PREV_PAGE = "PREV_PAGE";
 export const LOG_IN = "LOG_IN";
 export const CHANGE_METHOD = "CHANGE_METHOD";
 
-//Logging in or Signing up
-export const START_USER = "START_USER";
-export const ADD_USER = "ADD_USER";
+//Set the id or the name of the current user
 export const SET_USER = "SET_USER";
 
 //Add parent profiles

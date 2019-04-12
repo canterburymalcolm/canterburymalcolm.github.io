@@ -14,7 +14,7 @@ const TextInput = (props) => {
         placeholder = 'Your email address';
     } else if (props.isNumber) {
         type = 'number';
-        placeholder = '0';
+        placeholder = props.placeholder ? props.placeholder : '0';
     }
     
     return (
@@ -30,6 +30,8 @@ const TextInput = (props) => {
                 value={props.initial}
                 placeholder={placeholder}
                 onChange={props.onChange}
+                min={props.min}
+                max={props.max}
                 required
             />
         </div>

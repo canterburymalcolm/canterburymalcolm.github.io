@@ -1,33 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
 import OptionList from './option-list';
 
-function SelectInput(props) {
-    const desc = props.name.toUpperCase() + ': ';
-    //const value = props.value ? props.value: 'default';
+class SelectInput extends Component {
+    constructor(props) {
+        super(props);
 
-    return (
-        <div className="select-input" style={{ gridArea: props.name }}>
-            <label>
-                {desc}
-            </label>
-            <select
-                name={props.name}
-                defaultValue='default'
-                value={props.value}
-                onChange={() => {}}
-                required
-            >
-            <option value='default' disabled hidden>
-                {props.placeholder}
-            </option>
-                <OptionList 
-                    name={props.name}
-                    onChange={props.onChange}
-                    options={props.options}
-                />
-            </select>
-        </div>
-    );
+        this.props.onChange({
+            target: {
+                name: this.props.name,
+                value: this.props.placeholder,
+            }
+        });
+    }
+
+    render() {
+        const desc = this.props.name.toUpperCase() + ': ';
+
+        return (
+            <div className="select-input" style={{ gridArea: this.props.name }}>
+                <label>
+                    {desc}
+                </label>
+                <select
+                    name={this.props.name}
+                    defaultValue='MA'
+                    value={this.props.value}
+                    onChange={this.props.onChange}
+                    required
+                >
+                    <option value='MA' disabled hidden>
+                        {this.props.placeholder}
+                    </option>
+                    <OptionList
+                        name={this.props.name}
+                        onChange={this.props.onChange}
+                        options={this.props.options}
+                    />
+                </select>
+            </div>
+        );
+    }
 }
 
 export default SelectInput;
