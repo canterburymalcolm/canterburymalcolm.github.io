@@ -16,6 +16,7 @@ const jsonParser = bodyParser.json();
 
 const con = mysql.createConnection({
   host: "designerbabydb.csbfdivf1iuj.us-east-2.rds.amazonaws.com",
+  port: 3306,
   user: "master",
   password: "babysrus123"
 });
