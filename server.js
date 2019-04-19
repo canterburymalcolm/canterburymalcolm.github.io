@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const util = require('util');
 
 const app = express();
 
@@ -20,7 +21,10 @@ const con = mysql.createConnection({
 });
 
 con.connect((err) => {
-  if (err) throw err;
+  if (err) {
+    console.log("connection failed: " + util.inspect(err, { showHidden: true, depth: 2 }));
+    throw err;
+  }
   console.log("Connected!");
 
   let sql = 'USE designerbaby';
