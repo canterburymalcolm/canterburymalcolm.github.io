@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const util = require('util');
+const path = require('path');
 
 const app = express();
 
@@ -9,14 +10,13 @@ app.set('port', process.env.PORT || 3001);
 
 if (process.env.NODE_ENV === 'production') {
   console.log('In production, serving static assets');
-  app.use(express.static('client/build'));
+  app.use(express.static(path.join(_dirname, 'client/build')));
 }
 
 const jsonParser = bodyParser.json();
 
 const con = mysql.createConnection({
   host: "designerbabydb.csbfdivf1iuj.us-east-2.rds.amazonaws.com",
-  port: 3306,
   user: "master",
   password: "babysrus123"
 });
