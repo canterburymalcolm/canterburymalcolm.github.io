@@ -12,7 +12,7 @@ app.set('port', process.env.PORT || 3001);
 
 if (process.env.NODE_ENV === 'production') {
   console.log('In production, serving static assets');
-  app.use(express.static(path.join(__dirname, 'client/build')));
+  app.use(express.static('client/build'));
 }
 
 const jsonParser = bodyParser.json();
@@ -38,9 +38,9 @@ con.connect((err) => {
   });
 });
 
-app.get('/', (req, res) => {
-  res.sendFile('client/build/index.html');
-});
+// app.get('/', (req, res) => {
+//   res.sendFile('client/build/index.html');
+// });
 
 app.get('/api/user', (req, res) => {
   const username = req.query.name;
