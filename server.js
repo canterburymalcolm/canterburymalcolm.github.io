@@ -12,7 +12,7 @@ app.set('port', process.env.PORT || 3001);
 
 if (process.env.NODE_ENV === 'production') {
   console.log('In production, serving static assets');
-  app.use(express.static(path.join(__dirname, 'client/build')));
+  app.use(express.static('client/build'));
 }
 
 const jsonParser = bodyParser.json();
@@ -36,6 +36,10 @@ con.connect((err) => {
     if (err) throw err;
     console.log('using designerbaby ' + result);
   });
+});
+
+app.get('/', (req, res) => {
+  res.sendFile((path.join(__dirname, 'index.html')));
 });
 
 app.get('/api/user', (req, res) => {
