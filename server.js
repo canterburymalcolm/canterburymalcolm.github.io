@@ -6,11 +6,13 @@ const path = require('path');
 
 const app = express();
 
+console.log(__dirname);
+
 app.set('port', process.env.PORT || 3001);
 
 if (process.env.NODE_ENV === 'production') {
   console.log('In production, serving static assets');
-  app.use(express.static(path.join(_dirname, 'client/build')));
+  app.use(express.static(path.join(__dirname, 'client/build')));
 }
 
 const jsonParser = bodyParser.json();
