@@ -14,9 +14,9 @@ if (process.env.NODE_ENV === 'production') {
 const jsonParser = bodyParser.json();
 
 const con = mysql.createConnection({
-  host: "DESKTOP-493B9NS",
-  user: "root",
-  password: "stupidismankindall"
+  host: "designerbabydb.csbfdivf1iuj.us-east-2.rds.amazonaws.com",
+  user: "master",
+  password: "babysrus123"
 });
 
 con.connect((err) => {
