@@ -10,28 +10,25 @@ class AddDonor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            invalid: false,
             expanded: -1
         }
     }
 
+    //Select or deselect the donor at the given id
     expand(id) {
         this.setState(state => {
-            const selected = state.expanded === id ? -1 : id; 
+            const selected = state.expanded === id ? -1 : id;
             return ({
                 expanded: selected
             });
         });
     }
 
+    //Use the donor at the given id as the selected parent for this user
     submitDonor() {
-        this.setState(state => ({
-            invalid: state.expanded === -1
-        }), () => {
-            if (!this.state.invalid) {
-                this.props.nextPage();
-            }
-        });
+        if (this.state.expanded !== -1) {
+            this.props.nextPage();
+        }
     }
 
     render() {
@@ -42,14 +39,14 @@ class AddDonor extends Component {
                     key={i}
                     id={i}
                     expanded={this.state.expanded === i}
-                    onClick={(id) => {this.expand(id)}}
+                    onClick={(id) => { this.expand(id) }}
                 />;
         }
-        const isHidden = this.state.invalid ? '' : ' hidden';
+        const isHidden = this.state.expanded === -1 ? '' : ' hidden';
         return (
             <Form
                 className='add-donor'
-                onSubmit={() => {this.submitDonor()}}
+                onSubmit={() => { this.submitDonor() }}
             >
                 <OptionBar
                     name='method'

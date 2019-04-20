@@ -5,15 +5,16 @@ import TextInput from '../inputs/text-input';
 import SelectInput from '../inputs/select-input';
 import { addUser } from '../client';
 import { STATES } from '../../constants';
-import { setUser, nextPage } from '../../redux/actions';
+import { setUser, setOrder, nextPage } from '../../redux/actions';
 
-const SignUp = ({ curUser, setUser, nextPage }) => {
+const SignUp = ({ curUser, setUser, setOrder, nextPage }) => {
     return (
         <Form
             className="sign-up"
             onSubmit={(user) => {
-                addUser({...curUser, ...user}, id => {
-                    setUser({ id: id });
+                addUser({...curUser, ...user}, userInfo => {
+                    setUser(userInfo[0]);
+                    setOrder(userInfo[1]);
                 });
                 nextPage();
             }}
@@ -50,6 +51,6 @@ const SignUp = ({ curUser, setUser, nextPage }) => {
 }
 
 export default connect(
-    state => ({ curUser: state.user }),
-    { setUser, nextPage }
+    state => ({ curUser: state.userInfo.user }),
+    { setUser, setOrder, nextPage }
 )(SignUp);

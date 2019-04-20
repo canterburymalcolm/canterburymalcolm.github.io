@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { PAGES, formMap } from '../../constants';
-import { getPage, getMom, getDad } from '../../redux/selectors';
+import { getForm, getInitial } from '../../redux/selectors';
 
 class Form extends Component {
     constructor(props) {
         super(props);
-        //All the current values from the inputs in this form
 
-        let initial = {};
-        if (props.page === PAGES.ADD_MOM || props.page === PAGES.ADD_DAD) {
-            initial = props.page === PAGES.ADD_MOM ? getMom() : getDad();
-        } 
+        //All the current values from the inputs in this form
         this.state = {
-            values: initial 
+            values: props.initial
         };
-        
     }
 
     //Most general input change handler
@@ -24,11 +18,11 @@ class Form extends Component {
         const target = event.target;
         const name = target.name;
         const value = target.value;
-        this.setState(state => {
-            return {
-                values: { ...state.values, [name]: value }
-            }
-        } /*, () => { this.props.onChange(this.state.values) }*/ );
+        this.setState(state => (
+            { values: { ...state.values, [name]: value } }
+        ),
+            () => { if (this.props.onChange) this.props.onChange(this.state.values) }
+        );
     }
 
     render() {
@@ -65,6 +59,8 @@ class Form extends Component {
 }
 
 export default connect(
-    //Gives us our form id depending on the current page
-    state => ({ form: formMap.get(getPage(state)) })
+    state => ({
+        form: getForm(state),
+        initial: getInitial(state)
+    })
 )(Form);

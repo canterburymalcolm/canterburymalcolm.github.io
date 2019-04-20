@@ -4,7 +4,7 @@ import Form from '../inputs/form';
 import TextInput from '../inputs/text-input';
 import { PAGES } from '../../constants';
 import { hasUser } from '../client';
-import { setUser, nextPage } from '../../redux/actions';
+import { setUser, setOrder, nextPage } from '../../redux/actions';
 import { getPage } from '../../redux/selectors';
 import '../../styles/user-info.scss';
 
@@ -39,9 +39,10 @@ class LogIn extends Component {
             (user) => {
                 //Get the user_id of the this user if it exists
                 //Set the current user to that id
-                hasUser(user, true, index => {
-                    if (index >= 0) {
-                        this.props.setUser({ id: index });
+                hasUser(user, true, userInfo => {
+                    if (userInfo !== -1) {
+                        this.props.setUser(userInfo[0]);
+                        this.props.setOrder(userInfo[1]);
                         this.props.nextPage();
                     } else {
                         this.setState({
@@ -92,5 +93,5 @@ export default connect(
     state => ({
         isLanding: (getPage(state) === PAGES.LANDING)
     }),
-    { setUser, nextPage }
+    { setUser, setOrder, nextPage }
 )(LogIn);

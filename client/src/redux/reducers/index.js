@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import pageReducer from './page-reducer';
-import userReducer from './user-reducer';
+import userInfoReducer from './user-info-reducer';
 import parentsReducer from './parents-reducer';
 
 export default combineReducers({
     pages: pageReducer,
-    user: userReducer,
+    userInfo: userInfoReducer,
     parents: parentsReducer
 });

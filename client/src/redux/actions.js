@@ -4,9 +4,9 @@ import {
     LOG_IN,
     CHANGE_METHOD,
     SET_USER,
-    UPDATE_PARENT,
-    ADD_MOM,
-    ADD_DAD
+    SET_ORDER,
+    UPDATE_MOM,
+    UPDATE_DAD
 } from './action-types';
 
 //Transition between pages
@@ -21,16 +21,17 @@ export const setUser = (user) => ({
     payload: { user }
 });
 
-//Add or update parents
-export const updateParent = (parent) => ({
-    type: UPDATE_PARENT,
+export const setOrder = (order) => ({
+    type: SET_ORDER,
+    payload: { order }
+});
+
+//Update current parents
+export const updateMom = (parent) => ({
+    type: UPDATE_MOM,
     payload: { parent }
 });
-export const addMom = (parent) => ({
-    type: ADD_MOM,
-    payload: { parent }
-});
-export const addDad = (parent) => ({
-    type: ADD_DAD,
+export const updateDad = (parent) => ({
+    type: UPDATE_DAD,
     payload: { parent }
 });

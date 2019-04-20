@@ -4,23 +4,32 @@ import Form from '../inputs/form';
 import OptionBar from '../inputs/option-bar';
 import TextInput from '../inputs/text-input';
 import Checkboxes from '../inputs/checkboxes';
-import { PAGES } from '../../constants';
-import { updateParent, addMom, addDad, nextPage } from '../../redux/actions';
+import { addParent } from '../client';
+import { updateMom, updateDad, nextPage } from '../../redux/actions';
 import { getPage } from '../../redux/selectors';
+import { PAGES } from '../../constants';
 import '../../styles/parent-details.scss';
 
 const AddParent = (props) => {
 
-    const submitAction = props.page === PAGES.ADD_MOM ? props.addMom : props.addDad;
-    const onSubmit = (values) => {
-        submitAction(values);
-        props.nextPage();
+    let onChangeAction = props.updateDad;
+    let gender = 2;
+    if (props.page === PAGES.ADD_MOM) {
+        onChangeAction =  props.updateMom;
+        gender = 1;
+    }
+    const onChange = (values) => {
+        onChangeAction(values);
     };
     return (
             <Form 
                 className='add-parent'
-                onChange={(values) => props.updateParent(values)}
-                onSubmit={onSubmit}
+                onChange={(values) => onChange(values)}
+                onSubmit={(parent) => { 
+                    addParent(props.orderId, { gender: gender, ...parent }, () => {
+                    });
+                    props.nextPage();
+                }}
             >
             <OptionBar 
                 name='method'
@@ -82,6 +91,9 @@ const AddParent = (props) => {
 }
 
 export default connect(
-    state => ({ page: getPage(state) }),
-    { updateParent, addMom, addDad, nextPage }
+    state => ({ 
+        page: getPage(state),
+        orderId: state.userInfo.order 
+    }),
+    { updateMom, updateDad, nextPage }
 )(AddParent);

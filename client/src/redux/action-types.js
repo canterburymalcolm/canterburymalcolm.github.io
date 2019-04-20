@@ -8,8 +8,8 @@ export const CHANGE_METHOD = "CHANGE_METHOD";
 
 //Set the id or the name of the current user
 export const SET_USER = "SET_USER";
+export const SET_ORDER = "SET_ORDER";
 
-//Add parent profiles
-export const UPDATE_PARENT = "UPDATE_PARENT";
-export const ADD_MOM = "ADD_MOM";
-export const ADD_DAD = "ADD_DAD";
+//Update current parent profiles
+export const UPDATE_MOM = "UPDATE_MOM";
+export const UPDATE_DAD = "UPDATE_DAD";
