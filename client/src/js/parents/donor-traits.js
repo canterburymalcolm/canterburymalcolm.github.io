@@ -2,23 +2,23 @@ import React from 'react';
 import eyeIcon from '../../assets/eye-icon.png';
 import hairIcon from '../../assets/hair-icon.png';
 
-export const TraitBlocks = () => {
+export const TraitBlocks = ({traits}) => {
     return (
         <div className='trait-blocks'>
             <div>
                 <img alt="" src={eyeIcon}></img>
-                <span>Brown</span>
+                <span>{traits[0]}</span>
             </div>
             <div>
-                <span>25</span>
+                <span>{traits[1]}</span>
                 <span>years old</span>
             </div>
             <div>
                 <img alt="" src={hairIcon}></img>
-                <span>Blond</span>
+                <span>{traits[2]}</span>
             </div>
             <div>
-                <span>160</span>
+                <span>{traits[3]}</span>
                 <span>Pounds</span>
             </div>
         </div>

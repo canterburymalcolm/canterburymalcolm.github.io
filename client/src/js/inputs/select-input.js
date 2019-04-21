@@ -23,7 +23,6 @@ class SelectInput extends Component {
                 </label>
                 <select
                     name={this.props.name}
-                    defaultValue='MA'
                     value={this.props.value}
                     onChange={this.props.onChange}
                     required

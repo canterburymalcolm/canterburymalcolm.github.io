@@ -12,10 +12,11 @@ import '../../styles/parent-details.scss';
 
 const AddParent = (props) => {
 
+    console.log('Parent: ' + props.page);
     let onChangeAction = props.updateDad;
     let gender = 2;
     if (props.page === PAGES.ADD_MOM) {
-        onChangeAction =  props.updateMom;
+        onChangeAction = props.updateMom;
         gender = 1;
     }
     const onChange = (values) => {
@@ -26,10 +27,13 @@ const AddParent = (props) => {
                 className='add-parent'
                 onChange={(values) => onChange(values)}
                 onSubmit={(parent) => { 
+                    console.log('Adding parent');
                     addParent(props.orderId, { gender: gender, ...parent }, () => {
+                        console.log('Parent Added');
+                        props.nextPage()
                     });
-                    props.nextPage();
                 }}
+                key={props.page}
             >
             <OptionBar 
                 name='method'

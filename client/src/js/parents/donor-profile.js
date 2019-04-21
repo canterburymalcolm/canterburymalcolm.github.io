@@ -2,25 +2,40 @@ import React from 'react';
 import { TraitBlocks, TraitList } from './donor-traits';
 
 const DonorProfile = (props) => {
-    const numTraits = [
-        ['Age', 25],
-        ['Height', 180],
-        ['Weight', 160],
-        ['Foot Size', 9]
-    ];
-    const stringTraits = [
-        ['Eye Color', 'Brown'],
-        ['Hair Color', 'Blond'],
-        ['Strength', 'Very Strong'],
-        ['Emotional Stability', 'Very Stable']
-    ];
-    const traits = props.expanded ?
+    let fields = props.profile.fields;
+    let traits = props.profile.traits;
+    const blockTraits = [
+        traits['Eye Color'],
+        fields['age'],
+        traits['Hair Color'],
+        fields['weight']
+    ]
+
+    fields = Object.entries(fields)
+    traits = Object.entries(traits)
+
+    let name = 'John Doe'
+    let cost = 1000
+    fields = fields.filter((field) => {
+        if (field[0] === 'name') {
+            name = field[1]
+        } else if (field[0] === 'cost') {
+            cost = field[1]
+        } else {
+            return true;
+        }
+        return false;
+    })
+
+    console.log(name + ' at id: ' + props.id);
+
+    const traitView = props.expanded ?
         <div className='expanded-traits'>
-            <TraitList traits={numTraits} />
-            <TraitList traits={stringTraits} />
+            <TraitList traits={fields} />
+            <TraitList traits={traits} />
         </div>
         :
-        <TraitBlocks />
+        <TraitBlocks traits={blockTraits}/>
 
     const isExpanded = props.expanded ? ' expanded' : '';
     return (
@@ -29,10 +44,10 @@ const DonorProfile = (props) => {
             onClick={() => props.onClick(props.id)}
         >
             <div className='head'>
-                <span>John Doe</span>
+                <span>{name}</span>
             </div>
-            {traits}
-            {props.expanded && <span className='cost'>Cost $1000</span>}
+            {traitView}
+            {props.expanded && <span className='cost'>{'Cost $' + cost}</span>}
         </div>
     )
 }

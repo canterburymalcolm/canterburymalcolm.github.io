@@ -2,86 +2,6 @@ const db = require('./db');
 
 const con = db.con;
 
-//If the given userId already has an ongoing order then
-//use that otherwise make a new order for this user
-const getOrder = (userId, cb) => {
-    const sql =
-        `SELECT order_id, user_id FROM orders WHERE user_id = ?`;
-    con.query(sql, [userId], (err, result) => {
-        if (err) throw err;
-
-        if (result.length > 0) {
-            console.log('Found order at ' + result[0].order_id);
-            cb(result[0].order_id);
-        } else {
-            addOrder(userId, cb);
-        }
-    });
-}
-
-//Adds a default order to Orders with the given userId
-//returns the generated order_id
-const addOrder = (userId, cb) => {
-    addBaby(babyId => {
-        console.log('Created baby for order at ' + babyId);
-
-        const sql =
-            'INSERT INTO orders (user_id, baby_id) ' +
-            'VALUES (?, ?)';
-        con.query(sql, [userId, babyId], (err, result) => {
-            if (err) throw err;
-
-            console.log('Added order at ' + result.insertId);
-            cb(result.insertId);
-        });
-    });
-}
-
-//Adds a default baby to Baby, returns its id
-const addBaby = cb => {
-    const fields = [];
-    addPerson({ type: 3 }, babyId => {
-        fields[0] = babyId;
-        addPerson({}, momId => {
-            fields[1] = momId;
-            addPerson({ gender: 2 }, dadId => {
-                fields[2] = dadId;
-
-                const sql =
-                    'INSERT INTO baby (baby_id, mom_id, dad_id) ' +
-                    'VALUES (?, ?, ?)';
-                con.query(sql, fields, (err, result) => {
-                    if (err) throw err;
-
-                    console.log('added baby at ' + fields[0]);
-                    cb(fields[0]);
-                });
-            });
-        });
-    });
-}
-
-//Add a default person to People and return its id
-const addPerson = (person, cb) => {
-    const fields = [
-        'first',
-        'last',
-        person.type ? person.type : 1,
-        person.gender ? person.gender : 1,
-        0
-    ];
-
-    const sql =
-        'INSERT INTO people (first, last, type, gender, age) ' +
-        'VALUES (?, ?, ?, ?, ?)';
-    con.query(sql, fields, (err, result) => {
-        if (err) throw err;
-
-        console.log('added person at ' + result.insertId);
-        cb(result.insertId);
-    });
-};
-
 //Get all users with the given username,
 //Should always be an array of size one or zero because this
 //api endpoint cannot be called with a username that already exists
@@ -157,3 +77,84 @@ exports.add = (req, res) => {
         });
     });
 };
+
+//If the given userId already has an ongoing order then
+//use that otherwise make a new order for this user
+const getOrder = (userId, cb) => {
+    const sql =
+        `SELECT order_id, user_id FROM orders WHERE user_id = ?`;
+    con.query(sql, [userId], (err, result) => {
+        if (err) throw err;
+
+        if (result.length > 0) {
+            console.log('Found order at ' + result[0].order_id);
+            cb(result[0].order_id);
+        } else {
+            addOrder(userId, cb);
+        }
+    });
+}
+
+//Adds a default order to Orders with the given userId
+//returns the generated order_id
+const addOrder = (userId, cb) => {
+    addBaby(babyId => {
+        const sql =
+            'INSERT INTO orders (user_id, baby_id) ' +
+            'VALUES (?, ?)';
+        con.query(sql, [userId, babyId], (err, result) => {
+            if (err) throw err;
+
+            console.log('Added order at ' + result.insertId);
+            cb(result.insertId);
+        });
+    });
+}
+
+//Adds a default baby to Baby, returns its id
+const addBaby = cb => {
+    const fields = [];
+    addPerson({ type: 3 }, babyId => {
+        fields[0] = babyId;
+        addPerson({}, momId => {
+            fields[1] = momId;
+            addPerson({ gender: 2 }, dadId => {
+                fields[2] = dadId;
+
+                const sql =
+                    'INSERT INTO baby (baby_id, mom_id, dad_id) ' +
+                    'VALUES (?, ?, ?)';
+                con.query(sql, fields, (err, result) => {
+                    if (err) throw err;
+
+                    console.log('added baby at ' + fields[0]);
+                    cb(fields[0]);
+                });
+            });
+        });
+    });
+}
+
+//Add a default person to People and return its id
+const addPerson = (person, cb) => {
+    const fields = [
+        'first',
+        'last',
+        person.type ? person.type : 1,
+        person.gender ? person.gender : 1,
+        0,
+        0
+    ];
+
+    const sql =
+        'INSERT INTO people (first, last, type, gender, height, foot_size) ' +
+        'VALUES (?, ?, ?, ?, ?, ?)';
+    con.query(sql, fields, (err, result) => {
+        if (err) throw err;
+
+        console.log('added person at ' + result.insertId);
+        cb(result.insertId);
+    });
+};
+
+exports.addPerson = addPerson;

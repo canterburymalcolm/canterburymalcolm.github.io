@@ -1,67 +1,58 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { disorders } from '../../constants';
 
-class Checkboxes extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selected: []
-        }
-
-        this.updateForm();
-    }
-
-    updateForm() {
-        this.props.onChange({
+const Checkboxes = (props) => {
+    const updateForm = value => {
+        props.onChange({
             target: {
-                name: this.props.name,
-                value: this.state.selected
+                name: props.name,
+                value: value
             }
-        });
-    }
-
-    selectDisorder(target) {
-        const disorder = disorders[target.id];
-
-        this.setState(state => {
-            let selected = state.selected;
-            if (target.checked) {
-                selected = [...selected, disorder];
-            } else {
-                selected = selected.filter((id) => (disorder !== id));
-            }
-            return {
-                selected: selected
-            }
-        }, () => { this.updateForm() });
-    }
-
-    render() {
-        const boxes = disorders.map((desc, index) => {
-            return (
-                <div key={'box-' + index}>
-                    <input
-                        id={index}
-                        type='checkbox'
-                        onChange={(event) => this.selectDisorder(event.target)}
-                    />
-                    <label htmlFor={index}></label>
-                    <span>{desc}</span>
-                </div>
-            );
         })
-
-        return (
-            <div className='checkbox-container'>
-                <label>
-                    {this.props.desc}
-                </label>
-                <div className='checkboxes'>
-                    {boxes}
-                </div>
-            </div>
-        );
     }
+
+    if (!props.value) {
+        updateForm([]);
+    } 
+
+    const boxes = disorders.map((desc, index) => {
+        const checked = props.value.includes(desc);
+        return (
+            <div key={'box-' + index}>
+                <input
+                    id={index}
+                    type='checkbox'
+                    checked={checked}
+                    onChange={(event) => {
+                        //Add this disorder if it was checked otherwise remove it
+                        const disorder = disorders[event.target.id]
+                        let selected = props.value;
+
+                        if (event.target.checked) {
+                            selected = [...selected, disorder];
+                        } else {
+                            selected = selected.filter((id) => (disorder !== id));
+                        }
+
+                        updateForm(selected);
+                    }}
+                />
+                <label htmlFor={index}></label>
+                <span>{desc}</span>
+            </div>
+        )
+    })
+
+    return (
+        <div className='checkbox-container'>
+            <label>
+                {props.desc}
+            </label>
+            <div className='checkboxes'>
+                {boxes}
+            </div>
+        </div>
+    );
 }
 
 export default Checkboxes;

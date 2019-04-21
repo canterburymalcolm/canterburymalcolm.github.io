@@ -15,7 +15,6 @@ const FooterButton = (props) => {
         let form = formMap.get(props.page);
         //Assign the appropriate onClick depending on whether this is a primary
         //or secondary button
-        const onClick = props.first ? () => props.prevPage() : () => props.nextPage();
 
         if (props.first) {
             if (props.page === PAGES.LANDING) {
@@ -48,7 +47,7 @@ const FooterButton = (props) => {
         return <Button
             className={className}
             desc={desc}
-            onClick={onClick}
+            onClick={() => {props.prevPage()}}
             form={form}
             submit={submit}
         />
@@ -62,6 +61,6 @@ const FooterButton = (props) => {
 }
 
 export default connect(
-    state => ({ page: getPage(state) }),
+    state => ({ page: getPage(state, 'footer') }),
     { logIn, nextPage, prevPage }
 )(FooterButton);

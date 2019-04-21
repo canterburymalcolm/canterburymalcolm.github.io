@@ -13,5 +13,5 @@ const Title = ({ page }) => {
 }
 
 export default connect(
-    state => ({ page: getPage(state) })
+    state => ({ page: getPage(state, 'title') })
 )(Title);

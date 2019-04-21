@@ -9,12 +9,13 @@ import Footer from './footer';
 import { PAGES } from '../constants';
 import { getPage } from '../redux/selectors';
 import '../styles/content.scss';
+import ConfirmParents from './parents/confirm-parents';
 
 const Content = ({ page }) => {
     let content;
     let title;
     
-    //Determine what content and what title to use depending on the current page
+    //Determine what content to use depending on the current page
     switch (page) {
         case PAGES.LOG_IN:
             content = <LogIn />;
@@ -30,6 +31,9 @@ const Content = ({ page }) => {
         case PAGES.DONOR_DAD:
             content = <AddDonor />;
             break;
+        case PAGES.CONFIRM_PARENTS:
+            content = <ConfirmParents />;
+            break;
         default:
             content = <LogIn />;
     }
@@ -44,5 +48,5 @@ const Content = ({ page }) => {
 }
 
 export default connect(
-    state => ({ page: getPage(state) })
+    state => ({ page: getPage(state, 'content') })
 )(Content);

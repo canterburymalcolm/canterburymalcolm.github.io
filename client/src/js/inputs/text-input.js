@@ -2,10 +2,9 @@ import React from 'react';
 import '../../styles/inputs.scss';
 
 const TextInput = (props) => {
-
-    //Determine the type of this textInput
     let type = 'text';
     let placeholder = props.placeholder;
+    let autoComplete = '';
     if (props.isPassword) {
         type = 'password';
         placeholder = '••••••••••';
@@ -15,6 +14,7 @@ const TextInput = (props) => {
     } else if (props.isNumber) {
         type = 'number';
         placeholder = props.placeholder ? props.placeholder : '0';
+        autoComplete = 'off';
     }
     
     return (
@@ -27,11 +27,12 @@ const TextInput = (props) => {
             <input
                 name={props.name}
                 type={type}
-                value={props.initial}
+                value={props.value}
                 placeholder={placeholder}
                 onChange={props.onChange}
                 min={props.min}
                 max={props.max}
+                autoComplete={autoComplete}
                 required
             />
         </div>

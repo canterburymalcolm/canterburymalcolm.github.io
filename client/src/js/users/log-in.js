@@ -39,7 +39,9 @@ class LogIn extends Component {
             (user) => {
                 //Get the user_id of the this user if it exists
                 //Set the current user to that id
+                console.log('Logging in');
                 hasUser(user, true, userInfo => {
+                    console.log('Logged in');
                     if (userInfo !== -1) {
                         this.props.setUser(userInfo[0]);
                         this.props.setOrder(userInfo[1]);
@@ -91,7 +93,7 @@ class LogIn extends Component {
 
 export default connect(
     state => ({
-        isLanding: (getPage(state) === PAGES.LANDING)
+        isLanding: (getPage(state, 'log-in') === PAGES.LANDING)
     }),
     { setUser, setOrder, nextPage }
 )(LogIn);

@@ -6,7 +6,9 @@ const initialState = [PAGES.LANDING];
 function pageReducer(state = initialState, action) {
     switch (action.type) {
         case NEXT_PAGE:
-            return [...state, pageMap.get(state[state.length - 1])];
+            const page = pageMap.get(state[state.length - 1]);
+            console.log('next page: ' + page);
+            return [...state, page];
         case PREV_PAGE:
             return state.slice(0, state.length - 1);
         case LOG_IN:
@@ -29,6 +31,7 @@ function pageReducer(state = initialState, action) {
             }
         }
         default:
+            console.log('default: ' + action.type);
             return state;
     }
 }

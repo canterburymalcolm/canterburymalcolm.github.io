@@ -2,6 +2,7 @@
 //Throws an error if approprate
 const checkStatus = (response) => {
     if (response.status >= 200 && response.status < 300) {
+        console.log('response: ' + response.status);
         return response;
     }
     const error = new Error(`HTTP Error ${response.statusText}`);
@@ -63,3 +64,15 @@ export const addUser = (user, cb) => {
 export const addParent = (orderId, parent, cb) => {
     post('api/parent', { orderId: orderId, ...parent }, cb);
 };
+
+//Gets a list of the object representations of all
+//the donors in the database
+export const getDonors = (gender, cb) => {
+    get('api/donor?gender=' + gender, cb);
+}
+//Replaces one of the parents for this user with the
+//given donor
+export const addDonor = (orderId, donorId, gender, cb) => {
+    console.log(`Posting ${orderId}, ${donorId}, ${gender}`)
+    post('api/donor', { orderId: orderId, donorId: donorId, gender: gender }, cb)
+}

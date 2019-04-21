@@ -6,10 +6,14 @@ class Form extends Component {
     constructor(props) {
         super(props);
 
+        console.log(`form: ${props.form} initial: ${props.initial}`);
         //All the current values from the inputs in this form
         this.state = {
-            values: props.initial
+            values: props.initial,
+            submitted: false
         };
+
+        window.scrollTo(0, 0)
     }
 
     //Most general input change handler
@@ -20,21 +24,37 @@ class Form extends Component {
         const value = target.value;
         this.setState(state => (
             { values: { ...state.values, [name]: value } }
-        ),
-            () => { if (this.props.onChange) this.props.onChange(this.state.values) }
+        ), () => {
+            if (this.props.onChange) {
+                this.props.onChange(this.state.values)
+            }
+        }
         );
+    }
+
+    addToChildren(props) {
+        return React.Children.map(this.props.children, (child) => {
+            if (child) {
+                //console.log(child.props.name);
+                let value = this.state.values[child.props.name];
+                value = value ? value : '';
+                //console.log('set ' + child.props.name + ': ' + value);
+
+                props = {
+                    ...props,
+                    value: value,
+                    onChange: (event) => this.handleInputChange(event)
+                }
+                return React.cloneElement(child, props)
+            }
+        })
+
     }
 
     render() {
         //Give our input change handler to all of our children
-        const children = React.Children.map(this.props.children, (child) => {
-            if (child) {
-                //console.log(child.props.name + ': ' + this.state.values[child.props.name]);
-                return React.cloneElement(child, {
-                    onChange: (event) => this.handleInputChange(event)
-                });
-            }
-        });
+        // children = this.addToChildren({ value: '' })
+        const children = this.addToChildren({});
 
         return (
             <div>
@@ -44,9 +64,8 @@ class Form extends Component {
                     id={this.props.form}
                     //Pass along all of our values on submit
                     onSubmit={() => {
+                        //document.getElementById(this.props.form).reset();
                         this.props.onSubmit(this.state.values);
-                        document.getElementById(this.props.form).reset();
-                        window.scrollTo(0, 0);
                     }}
                     target="trash"
                 >

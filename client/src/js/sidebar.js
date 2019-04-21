@@ -8,11 +8,13 @@ import '../styles/sidebar.scss';
 
 const Sidebar = ({ page }) => {
     let image;
-    switch(page) {
+
+    switch (page) {
         case PAGES.ADD_MOM:
         case PAGES.ADD_DAD:
         case PAGES.DONOR_MOM:
         case PAGES.DONOR_DAD:
+        case PAGES.CONFIRM_PARENTS:
             image = parentBubble;
             break;
         default:
