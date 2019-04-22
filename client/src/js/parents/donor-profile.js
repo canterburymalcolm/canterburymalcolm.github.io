@@ -20,7 +20,7 @@ const DonorProfile = (props) => {
         if (field[0] === 'name') {
             name = field[1]
         } else if (field[0] === 'cost') {
-            cost = field[1]
+            cost = field[1] ? field[1] : 0
         } else {
             return true;
         }

@@ -5,7 +5,8 @@ export const FORMS = {
     OLD_USER: 'old-user',
     ADD_USER: 'add-user',
     ADD_PARENT: 'add-parent',
-    ADD_DONOR: 'add-donor'
+    ADD_DONOR: 'add-donor',
+    EDIT_PARENTS: 'edit-parents'
 }
 
 //All the pages on the website
@@ -39,7 +40,8 @@ export const formMap = new Map([
     [PAGES.ADD_MOM, FORMS.ADD_PARENT],
     [PAGES.ADD_DAD, FORMS.ADD_PARENT],
     [PAGES.DONOR_MOM, FORMS.ADD_DONOR],
-    [PAGES.DONOR_DAD, FORMS.ADD_DONOR]
+    [PAGES.DONOR_DAD, FORMS.ADD_DONOR],
+    [PAGES.CONFIRM_PARENTS, FORMS.EDIT_PARENTS]
 ]);
 
 const TITLES = {
@@ -48,9 +50,8 @@ const TITLES = {
     ADD_USER: "Hello! Please tell us a little bit about yourself.",
     MOM: "Step one is adding a mom.",
     DAD: "Now we just need a dad",
-    CONFIRM_PARENTS: "We're almost ready to design a baby! Unfortunately that " +
-                     "functionality is not quite there yet. The baby creation process " +
-                     "is still a work in progress but we'll get there soon."
+    CONFIRM_PARENTS: "Unfortunately we won't be able to create a baby today, however " +
+                     "you can review and edit your parents here."
 };
 
 export const titleMap = new Map([

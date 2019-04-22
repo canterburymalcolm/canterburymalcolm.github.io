@@ -1,4 +1,4 @@
-import { NEXT_PAGE, PREV_PAGE, LOG_IN, CHANGE_METHOD } from '../action-types';
+import { NEXT_PAGE, PREV_PAGE, LOG_IN, CHANGE_METHOD, EDIT_PARENT } from '../action-types';
 import { PAGES, pageMap } from '../../constants';
 
 const initialState = [PAGES.LANDING];
@@ -30,6 +30,9 @@ function pageReducer(state = initialState, action) {
                 default: return state;
             }
         }
+        case EDIT_PARENT:
+            const { parent } = action.payload
+            return state.slice(0, state.length - parent);
         default:
             console.log('default: ' + action.type);
             return state;

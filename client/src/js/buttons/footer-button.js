@@ -41,6 +41,9 @@ const FooterButton = (props) => {
                 case PAGES.DONOR_DAD:
                     desc = "Add Parent";
                     break;
+                case PAGES.CONFIRM_PARENTS:
+                    desc = "Edit Parent";
+                    break;
                 default: desc = "Next";
             }
         }

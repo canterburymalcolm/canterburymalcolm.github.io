@@ -113,26 +113,26 @@ const addOrder = (userId, cb) => {
 
 //Adds a default baby to Baby, returns its id
 const addBaby = cb => {
-    const fields = [];
+    const fields = []
     addPerson({ type: 3 }, babyId => {
-        fields[0] = babyId;
+        fields[0] = babyId
         addPerson({}, momId => {
-            fields[1] = momId;
+            fields[1] = momId
             addPerson({ gender: 2 }, dadId => {
-                fields[2] = dadId;
+                fields[2] = dadId
 
                 const sql =
                     'INSERT INTO baby (baby_id, mom_id, dad_id) ' +
-                    'VALUES (?, ?, ?)';
-                con.query(sql, fields, (err, result) => {
+                    'VALUES (?, ?, ?)'
+                con.query(sql, fields, err => {
                     if (err) throw err;
 
-                    console.log('added baby at ' + fields[0]);
-                    cb(fields[0]);
-                });
-            });
-        });
-    });
+                    console.log('added baby at ' + fields[0])
+                    cb(fields[0])
+                })
+            })
+        })
+    })
 }
 
 //Add a default person to People and return its id

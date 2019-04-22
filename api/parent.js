@@ -60,8 +60,6 @@ const addParent = (req, res) => {
     const body = req.body
 
     getParentId(body.orderId, body.gender, parentId => {
-
-
         const respond = () => { res.json(true) };
 
         donor.isDonor(parentId, found => {
@@ -119,6 +117,39 @@ const replaceParent = (parentId, body, cb) => {
                 console.log('All traits added')
                 cb();
             })
+        })
+    })
+}
+
+exports.get = (req, res) => {
+    const orderId = req.query.orderId;
+
+    if (!orderId) {
+        res.json({
+            error: 'Missing required parameter: \'orderId\''
+        });
+        return;
+    }
+
+    //Get the ids of the mom and dad associated with this order
+    getParentId(orderId, 1, mom_id => {
+        getParentId(orderId, 2, dad_id => {
+
+            const sql =
+                'SELECT people_id ' +
+                'FROM people ' +
+                'WHERE people_id = ? OR people_id = ?'
+            con.query(sql, [mom_id, dad_id], (err, result) => {
+                if (err) throw err;
+
+                const parentIds = result.map(row => (row['people_id']))
+
+                donor.getDonorInfo(parentIds, [], parents => {
+                    console.log('Both parents retrieved');
+                    res.json(parents)
+                })
+            })
+
         })
     })
 }

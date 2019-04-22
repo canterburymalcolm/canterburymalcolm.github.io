@@ -9,6 +9,14 @@
     grid: "method method method method method method method . ." 1fr "line line line line line line line line line" 40px "first first first first . last last last last" 1fr "age age eye eye eye eye eye eye eye" 1fr "weight weight hair hair hair hair hair hair hair" 1fr "height height . emotion emotion emotion emotion emotion emotion" 1fr "foot foot . strength strength strength strength strength strength" 1fr "check check check check check check check check check" auto /1fr 1fr 1fr 1fr 40px 1fr 1fr 1fr 1fr;
 }
 
+.confirm-parents {
+    .parent-container {
+        display: grid;
+        justify-items: center;
+        margin-bottom: 150px;
+    }
+}
+
 .add-donor {
     grid: "method method method method method method method . ." 1fr 
           "line line line line line line line line line" 40px 

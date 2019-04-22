@@ -47,7 +47,7 @@ exports.add = (req, res) => {
         const sqlSet =
             `UPDATE baby set ${field} = ? ` +
             `WHERE ${field} = ?`
-        con.query(sqlSet, [donorId, parentId], (err, result) => {
+        con.query(sqlSet, [donorId, parentId], err => {
             if (err) throw err;
 
             isDonor(parentId, found => {
@@ -149,3 +149,5 @@ const getDonorInfo = (donorIds, donors, cb) => {
         })
     })
 }
+
+exports.getDonorInfo = getDonorInfo;

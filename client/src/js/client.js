@@ -63,7 +63,12 @@ export const addUser = (user, cb) => {
 //Adds the given parent to the order at the given id 
 export const addParent = (orderId, parent, cb) => {
     post('api/parent', { orderId: orderId, ...parent }, cb);
-};
+}
+
+//Gets the current parents for this order as objects
+export const getParents = (orderId, cb) => {
+    get('api/parent?orderId=' + orderId, cb);
+}
 
 //Gets a list of the object representations of all
 //the donors in the database

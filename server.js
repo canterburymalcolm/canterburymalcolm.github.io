@@ -24,6 +24,8 @@ app.get('/api/user', user.get)
 //Adds the given user to the user table
 app.post('/api/user', jsonParser, user.add)
 
+//Gets the current parents as objects
+app.get('/api/parent',  parent.get)
 //Add the given parent to this user's order
 app.post('/api/parent', jsonParser, parent.add)
 
