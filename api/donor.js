@@ -3,6 +3,8 @@ const db = require('./db');
 
 const con = db.con;
 
+//Gets a list of the object representations of all the donors
+//in the database
 exports.get = (req, res) => {
     const gender = req.query.gender;
 

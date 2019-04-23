@@ -4,56 +4,7 @@ const db = require('./db');
 
 const con = db.con;
 
-const addDonor = (req, res) => {
-    if (!req.body) return res.sendStatus(400);
-
-    const body = req.body
-
-    const fields = [
-        body.first,
-        body.last,
-        2,
-        body.gender,
-        body.age,
-        body.weight,
-        body.height,
-        body.foot,
-        Math.round((Math.random() * 14999) + 1000)
-    ]
-
-    const sql =
-        'INSERT INTO people (first, last, type, gender, age, weight, ' +
-        'height, foot_size, cost) ' +
-        'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    con.query(sql, fields, (err, result) => {
-        if (err) throw err;
-
-        const donorId = result.insertId;
-        console.log('added donor at ' + donorId);
-
-        //Add all of this parent's traits to the people_has_traits table
-        const traits = [
-            body.eye,
-            body.hair,
-            body.emotion,
-            body.strength,
-            ...body.disorders
-        ]
-
-        //First remove all pre-existing traits to avoid duplicates
-        clearTraits(donorId, () => {
-            //Adds each trait in traits recursively so that the
-            //response is only sent after all queries have finished
-            addTrait(traits, donorId, () => {
-                console.log('All traits added to donor')
-                res.json(true)
-            })
-        })
-    })
-}
-
 //Updates this order's parent with the given body
-
 const addParent = (req, res) => {
     if (!req.body) return res.sendStatus(400);
 
@@ -167,10 +118,6 @@ const clearTraits = (parentId, cb) => {
         cb();
     })
 }
-
-/* TODO
-    - combine the two queries in addTrait into one query
-*/
 
 //Gets the id of the given trait with the given type
 //and adds it to the people_has_trait table for this parent

@@ -49,6 +49,7 @@ exports.get = (req, res) => {
     });
 };
 
+//Adds this user to the databse and creates a coresponding order
 exports.add = (req, res) => {
     if (!req.body) return res.sendStatus(400);
 
